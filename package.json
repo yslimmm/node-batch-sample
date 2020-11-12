@@ -1,0 +1,36 @@
+{
+  "name": "track-batch",
+  "version": "1.0.0",
+  "private": true,
+  "description": "에러 발생된 화자분리만 재시도하는 배치",
+  "main": "app.js",
+  "bin": {
+    "app": "./bin/www"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "build": "pkg . --targets node10-win-x64 --out-path dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "pkg": {
+    "assets": [
+      "models/**/*"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Selvas-AI/LawTop4TrackBatch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Selvas-AI/LawTop4TrackBatch/issues"
+  },
+  "dependencies": {
+    "elastic-apm-node": "^3.8.0",
+    "mariadb": "^2.5.1",
+    "node-schedule": "^1.3.2",
+    "sequelize": "^6.3.5",
+    "signale": "^1.4.0",
+    "uuid": "^3.3.2"
+  }
+}

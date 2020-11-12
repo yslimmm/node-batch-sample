@@ -1,0 +1,25 @@
+const app = require('../app');
+const signale = require('signale').scope('track.batch');
+const config = require('../config');
+const schema = require('../models/index');
+
+const port = parseInt(process.env.NODE_PORT, 10) || config.port;
+
+const env = process.env.NODE_ENV;
+const options = config.database;
+if (env !== 'production') options.database = options.database.concat(`_${env}`);
+options.host = process.env.DATABASE_HOST || config.database.host;
+options.port = process.env.DATABASE_PORT || config.database.port;
+options.username = process.env.DATABASE_USERNAME || config.database.username;
+options.password = process.env.DATABASE_PASSWORD || config.database.password;
+
+schema.Initialize(options)
+  .then(() => {
+    signale.complete({ prefix: '[Database]', message: 'Connected.' });
+
+//    const server = http.createServer(app);
+//    server.listen(port, () => {
+//      signale.info(`listening on *:${port} / ${env}`);
+//    });
+  })
+  .catch(error => signale.error('Failed database connection.', error));
